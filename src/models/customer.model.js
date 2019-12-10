@@ -1,33 +1,36 @@
-let mongoose = require('mongoose')
+// let mongoose = require('mongoose')
 
-const server = ''
-const database = ''
-const user = ''
-const password = 'NMRlvFS33gO4GR6M'
+// const server = ''
+// const database = ''
+// const user = ''
+// const password = 'NMRlvFS33gO4GR6M'
 
-mongoose.connect(`mongodb+srv://local_node:${password}@clusternode-cadke.mongodb.net/test?retryWrites=true&w=majority`)
+// mongoose.connect(`mongodb+srv://local_node:${password}@clusternode-cadke.mongodb.net/test?retryWrites=true&w=majority`)
 
-// const mysql = require('mysql');
+// let CustomerSchema = new mongoose.Schema({
+//     name: String,
+//     email: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     }
+// })
 
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     port: 3306,
-//     user: 'root',
-//     password: 'password',
-//     database: 'node_local'
-// });
-// connection.connect((err) => {
-//     if (err) throw err;
-//     console.log('Connected!');
-// });
+// module.exports = mongoose.model('Customer', CustomerSchema)
 
-let CustomerSchema = new mongoose.Schema({
-    name: String,
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    }
-})
+const mysql = require('mysql');
 
-module.exports = mongoose.model('Customer', CustomerSchema)
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'password',
+    database: 'node_local'
+});
+connection.connect((err) => {
+    if (err) throw err;
+    console.log('Connected!');
+});
+
+
+module.exports = connection
