@@ -28,12 +28,45 @@ let router = express.Router()
 
 //create a new customers
 //POST localhost:3000/customers
-router.get('/customer/create', (req, res) => {
-    let sql = 'insert into customers(name,email,organization) values("Ibrahim", "ibrahim.wali@gmail.com", "CentricDXB")'
+router.post('/customer/create', (req, res) => {
+    //return res.send(`insert into customers(name,email,organization) values(${req.body.name}, ${req.body.email}, ${req.body.organization})`)
+    //req.body
+    if (!req.body) {
+        return res.status(400).send('Request body is missing')
+    }
+
+    let sql = `insert into customers(name,email,organization) values('${req.body.name}', '${req.body.email}', '${req.body.organization}')`
 
     CustomerModel.query(sql, (err) => {
         if (err) throw err
         res.send('Customer created successfully')
+    })
+
+
+
+})
+
+//create a new customers
+//POST localhost:3000/customers
+router.get('/customer/all', (req, res) => {
+    let sql = 'Select * from customers'
+
+    CustomerModel.query(sql, (err, rows, fields) => {
+        if (err) throw err
+        //res.send(rows[0]["name"])
+        res.send(rows)
+    })
+})
+
+//create a new customers
+//POST localhost:3000/customers
+router.get('/customer/profile/:email', (req, res) => {
+    let sql = `Select * from customers where id=${req.params.email}`
+
+    CustomerModel.query(sql, (err, rows, fields) => {
+        if (err) throw err
+        //res.send(rows[0]["name"])
+        res.send(rows)
     })
 })
 
